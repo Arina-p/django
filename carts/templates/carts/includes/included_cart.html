@@ -1,0 +1,36 @@
+{% load static %}
+
+<div>
+    {% for cart in carts %}
+            <h5>{{ cart.product.name }}</h5>
+        <ul>
+            <li>
+                    
+                    <div class="price">
+                        <p>x {{ cart.product.price }} = </p>    
+                    
+
+                    <strong> {{cart.products_price}} рублей</strong>
+                    </div>
+
+                    <div>
+                        <a href="{% url "cart:cart_remove" %}" class="remove-from-cart" data-cart-id="{{ cart.id }}">
+                            {% csrf_token %}
+                            <img src="{% static "deps/icons/trash3-fill.svg" %}"
+                                alt="Catalog Icon" width="16" height="16">
+                        </a>
+                    </div>
+            </li>
+        </ul>
+    {% endfor %}
+</div>
+
+<div>
+        <p>Итого товар(а) на сумму</p>
+        <h4><strong>{{ carts.total_price }} рублей</strong></h4>  
+</div>
+{% if carts and not order %}
+                    <a class="button" href="{% url "orders:create_order" %}">
+                        Оформить заказ
+                    </a>
+{% endif %}

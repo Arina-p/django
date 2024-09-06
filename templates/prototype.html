@@ -1,0 +1,87 @@
+{% load static %}
+{% load catalog_tags %}
+{% load check_group %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "deps/css/my_css.css" %}">    
+    {% block css %}
+    {% endblock %}
+    <title>{{ title }}</title>
+</head>
+<body>
+    <header>  
+        <img src="{% static 'deps/images/icon.png' %}" class="logo">
+        <a href="{% url 'main:home' %}" class="top-btn">Фитнес-студия</a>
+        <div class="bx bx-menu" id="menu-icon"></div>
+        <ul class="navlist">
+            <li><a href="{% url 'main:home' %}">О нас</a></li>
+            <li><a href="{% url 'directions' %}">Направления</a></li>
+            <li><a href="{% url 'catalog:catalog' 'all' %}">Абонементы</a></li>
+            <li><a href="{% url 'instructors' %}">Наша команда</a></li>
+              <li><a href="{% url 'schedule' %}">Расписание</a></li>
+              <li><a href="{% url 'main:home' %}#user_reviews">Отзывы</a></li>
+              <li><a href="{% url 'main:home' %}#contacts">Контакты</a></li>
+            {% if user.is_authenticated or  request.user.is_authenticated %}
+            <li class="header__nav-list-item">
+                <a href="{% url 'users:profile'%}">Личный кабинет</a>
+                <ul class="header__nav-list-items">   
+                    {% if user.is_admin or user.is_staff or request.user|has_group:'Сотрудник' %}
+                    <li class="header__nav-list-item">
+                        <a href="{% url 'admin:index' %}"> Админ панель</a>
+                    </li>
+                    {% endif %}
+
+                        <li class="header__nav-list-item">
+                            <a href="{% url 'users:logout'%}"> Выйти</a>
+                        </li>
+                        <li class="user-info">
+                            {{ request.user }}
+                        </li>               
+            {% else %}    
+                <li class="header__nav-list-item">
+                    <a href="{% url 'users:login'%}"> Войти</a>
+                </li>
+                <li class="header__nav-list-item">
+                    <a href="{% url 'users:register'%}"> Регистрация</a>
+                </li>  
+            {% endif %}            
+                </ul>
+             </li>
+             {% if user.is_authenticated or  request.user.is_authenticated %}
+              <li>
+              <a href="{% url 'users:users_cart' %}" class="btn no-underline"
+                        >
+                            <img class="mx-1" src="{% static '/deps/icons/cart.png' %}" alt="Catalog Icon"
+                                width="36" height="36">
+                        </a>
+              </li>
+              {% endif %}
+        </ul>
+    </header>
+    <main>
+    <section>    
+        <!-- Контент -->
+        <div class="container">
+            <div class="row mt-1">
+                <div class="col-lg-2">
+                </div>
+                <div >
+                    {% include "includes/notifications.html" %}
+                    <!-- Контент на странице -->
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+    {% block footer %}{% endblock %}
+    <script src="{% static "deps/js/jquery/jquery-3.7.0.min.js" %}"></script>
+    <script src="{% static "deps/js/jquery-ajax.js" %}"></script>
+    <script src="{% static "deps/js/header.js" %}"></script>
+</body>
+</html>

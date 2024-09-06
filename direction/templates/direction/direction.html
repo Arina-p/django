@@ -1,0 +1,25 @@
+{% extends "prototype.html" %}
+{% load static %}
+
+{% block content %}
+
+
+<div class="directions-list">
+
+    <h1>Список направлений:</h1>
+    
+{% for direction in directions %}
+
+<div class="direction">
+        <h2>{{ direction.name }}</h2>
+        <p>{{ direction.description }}</p>
+    <div> 
+        {% if direction.image %}
+            <img src="{{ direction.image.url }}" alt="{{ direction.name }}">
+        {% endif %}
+        <p>Длительность: {{ direction.duration }}</p>
+    </div> </div> 
+{% endfor %}
+</div>
+
+{% endblock %}

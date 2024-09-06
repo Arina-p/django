@@ -1,0 +1,19 @@
+{% extends "prototype.html" %}
+{% load static %}
+{% load carts_tags %}
+
+
+{% block content %}
+{% user_carts request as carts %}
+
+        <div class="cart" id="cart-items-container">
+            <div class="cart-header">
+                <h2>Корзина</h2>
+            </div>    
+                <!-- Разметка корзины -->
+                {% include "carts/includes/included_cart.html" %}
+                <!-- Закончилась разметка корзины -->
+        </div>
+            
+        
+{% endblock  %}

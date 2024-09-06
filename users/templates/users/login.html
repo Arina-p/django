@@ -1,0 +1,20 @@
+{% extends 'prototype.html' %}
+{% load static %}
+{% block titlen %}Авторизация{% endblock %}
+{% block content %}
+
+<div class="register-container">
+<form method="post" class="register-form"> 
+    <h2> Авторизация</h2>
+    {% csrf_token %}
+    <div class="form-error">{{ form.non_field_errors }}</div>
+    {% for f in form %}
+    <p><label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}</label>{{ f }}</p>
+    <div class="form-error">{{ f.errors }}</div>
+    {% endfor %}
+    <p><button type="submit">Войти</button></p>
+</form>
+</div>
+
+
+{% endblock %}

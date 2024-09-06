@@ -1,0 +1,106 @@
+{% extends 'prototype.html' %}
+{% load static %}
+{% load carts_tags %}
+{% load check_group %}
+
+{% block content %}
+
+        <div class="profilecontainer">
+            <div class="left-column">
+            <div class="profile">
+                
+                    <h3>Личная информация</h3>
+                    <br>
+                        <div >              
+                            <div >
+                                <ul>
+                                    {% for field_name, field_value in profile_data.items %}
+                                    <li><strong>{{ field_name }}:</strong> {{ field_value }}</li>
+                                    {% endfor %}
+                                    </ul>
+                            </div>
+                        </div>     
+                
+            </div>
+            {% if request.user|has_group:'Клиент' %}
+            <!-- Оформленные заказы -->
+            <div class="orders">
+                <h3>Мои заказы</h3>
+                {% for order in orders %}
+                <div class="order-item active">
+                    <div class="order-summary">
+                        Заказ № {{ order.id }} - {{ order.created_timestamp }} | Статус: <strong>{{ order.requires_delivery }}</strong>
+                    </div>
+                    <div class="order-details">
+                        <table class="orders-table">
+                            <thead>
+                                <tr>
+                                    <th>Товар</th>
+                                    <th>Количество</th>
+                                    <th>Цена</th>
+                                    <th>Общая стоимость</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in order.orderitem_set.all %}
+                                <tr>
+                                    <td>{{ item.product.name }}</a></td>
+                                    <td>{{ item.quantity }}</td>
+                                    <td>{{ item.price }}</td>
+                                    <td>{{ item.products_price }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+                
+            </div>
+        <div class="right-column">
+        <div class="memberships">    
+            <h3>Активные абонементы</h3>
+            <ul>
+                {% for membership in active_memberships %}
+                <li>
+                    <strong>{{ membership.product.name }}</strong> - Количество доступных занятий: {{ membership.number }}
+                    <ul>
+                    <li>Дата начала действия: {{ membership.start_date }}</li>
+                    <li>Дата окончания действия: {{ membership.end_date }}</li>
+                    </ul>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="active_records"> 
+            <h3>Активные записи</h3>
+            <ul>
+                {% for record in active_records %}
+                    <li>
+                        {% comment %} <strong>Абонемент:</strong> {{ record.membership.product.name }} {% endcomment %}
+                        {% comment %} <br> {% endcomment %}
+                        <strong>Занятие:</strong> {{ record.fitnessclass.direction.name }} - {{ record.fitnessclass.class_date }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="inactive_records">
+            <h3>Архив занятий</h3>
+            <ul>
+                {% for record in inactive_records %}
+                    <li>
+                        <strong>Занятие:</strong> {{ record.fitnessclass.direction.name }} - {{ record.fitnessclass.class_date }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+
+    </div>
+        {% endif %}
+        </div>
+        
+    
+
+{% endblock  %}

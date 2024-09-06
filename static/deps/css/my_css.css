@@ -1,0 +1,863 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Playfair Display', serif;
+  list-style: none;
+  text-decoration: none; 
+}
+
+body {
+  background-image: url("../images/bg-image.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center center;
+  background-size: cover;
+  height: 100%;
+}
+main {
+  padding-top: 40px; /* Высота вашей шапки + отступ */
+}
+
+.dropdown-toggle::after {
+  content: none;
+}
+
+.custom-shadow {
+  box-shadow: 5px 5px 25px 19px #000000;
+}
+
+.product_id {
+  color: gray;
+  font-size: 15px;
+}
+
+.badge.bg-warning.text-dark {
+  position: absolute;
+  top: 10px;
+  right: 5px;
+  z-index: 1;
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-size: 1rem;
+  box-shadow: 2px 2px 15px 9px #000000;
+}
+
+.badge-banner {
+  top: 80%;
+  border-radius: 15px;
+  font-size: 0.7rem;
+}
+
+
+
+:root{
+  --bg-color: #F9F4F5;
+  --text-color: #000;
+  --p-font: 1.1rem;
+
+}
+
+header{
+  position: fixed;
+  width: 100%; /*на всю ширину*/
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex; /*тип отображения бокса/эл */
+  align-items: center; /*выравнивание по центру (в высоте)*/
+  justify-content: space-between; /*выравнивание по главной оси*/
+  background: #FFFFFF; /*transparent прозрачный */
+  border-bottom: 1px solid #aba4a4;
+  padding: 10px 10%; /*свойство, устан. отступ (по вертикали и горизонтали)*/
+  /* 10px 18% менять */
+  transition: .3s;
+}
+
+
+.logo img{
+  max-width: 100%;
+  width: 20px;
+  height: auto;
+}
+.navlist{
+  display: flex; 
+  flex-direction: row;
+  align-items: center;
+  
+ 
+}
+.navlist a{  
+  font-size: var(--p-font);
+  color: var(--text-color);
+  padding: 9px 14px; 
+  /* 10 27  менять чтобы вмещались все пункты меню*/
+  font-weight: 500; 
+  position: relative;
+}
+.user-info {
+  padding: 2px 14px; /* Тот же padding, что и у других элементов меню */
+  display: block; /* Превращает элемент в блок для одинакового отображения */
+  align-items: center; /* Центрирование по вертикали */
+  height: 100%; /* Устанавливает высоту, чтобы равнять с другими элементами */
+  font-size: var(--p-font);
+  font-weight: 550; 
+}
+.navlist a:hover::after, .navlist a.active::after{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #a5885a; /* Цвет подчеркивания */
+  z-index: 1001;
+}
+.no-underline::after {
+  display: none; /*  Скрываем подчеркивание  */
+}
+
+#menu-icon{
+  font-size: 35px;
+  color: var(--text-color);
+  z-index: 10001;
+  cursor: pointer;
+  display: none;
+  
+}
+.top-btn{
+  /* display: inline-block; */
+  padding: 9px 16px;
+  /* 9 30 */
+  color: var(--text-color);
+  font-weight: 500;
+  font-size: 24px;
+}
+/* .navlistreg a{ 
+  font-size: var(--p-font);
+  color: var(--text-color);
+  padding: 9px 30px;
+  font-weight: 500;
+  
+} */
+.header__nav-list-item:hover .header__nav-list-items {
+  display: flex;
+  background-color: #ffffff;
+  flex-direction: column; /*направление сверху вниз*/
+  position: absolute;
+  row-gap: 15px;
+  padding: 20px;
+
+}
+.header__nav-list-items {
+  display: none;
+}
+
+section{
+  padding-left: 3%;
+  padding-right: 3%;
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+.home{
+  padding: 0px 4%;
+  min-height: 82vh;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  align-items: center;
+  grid-gap: 2rem;
+}
+.home-img img{
+  max-width: 100%;
+  width: 540px;
+  height: auto;
+}
+.home-text {
+  font-size: 26px;
+  text-align: center;
+}
+.home1{
+  align-items: center;
+}
+.home-image img{
+  max-width: 100%;
+  width: 472px;
+  height: auto;
+}
+.footer {
+  width: 100%;
+  color: #ffffff;
+  background: #211f1f;
+  min-height: 100px;
+}
+.footer__wrapper {
+  margin: 0 100px;
+  padding: 30px 0;
+  display: flex; 
+}
+.footer__wrapper-list {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px; 
+}
+.footer__wrapper-list a{
+  color: #ffffff;
+}
+.footer__wrapper-h5 {
+  font-size: 22px;
+}
+.footer__wrapper-list-item {   
+  font-size: 18px;   
+}
+
+.maininfo {
+  background: rgba(255, 255, 255, 0.7);
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Два столбца с равной шириной */
+  grid-gap: 20px; /* Отступ между столбцами */
+  align-items: center; /* Выравниваем элементы по вертикали */
+}
+.maininfo h1{
+  font-family: 'Monotype Corsiva', cursive;
+  font-size: 70px;
+  color: #5b4b31;
+  padding-left: 30px;
+  
+}
+.maininfo p {
+  max-width: 90%; /* Ограничиваем ширину текста */
+  text-align: justify; /* Выравнивание текста по ширине */
+  padding-left: 30px;
+  font-size: 30px;
+  
+}
+.maininfo p span{
+  font-size: 20px;
+  
+}
+.maininfo img {
+  width: 100%;
+  height: auto;
+  
+}
+.mainbutton {
+  display: inline-block;
+  padding: 10px 10px; /* Задаем отступы вокруг текста кнопки */
+  background-color: #a5885a; /* Цвет фона кнопки */
+  color: white; /* Цвет текста кнопки */
+  text-align: center; /* Выравнивание текста по центру */
+  text-decoration: none; /* Убираем подчеркивание у ссылок */
+  border-radius: 5px; /* Закругляем углы кнопки */
+  border: none; /* Убираем границу кнопки */
+  cursor: pointer; /* Делаем курсор указателем при наведении на кнопку */
+  font-size: 18px; /* Размер шрифта */
+  transition: background-color 0.3s; /* Плавное изменение цвета фона при наведении */
+  margin-left: 30px;
+  margin-top: 10px;
+}
+
+.mainbutton:hover {
+  background-color: #735f3e; /* Изменяем цвет фона при наведении */
+}
+
+.contacts {
+  display: flex;
+  width: 100%;
+  gap: 20px; /* Отступ между блоками */
+  justify-content: center; /* Выравнивание по центру по горизонтали */
+  /* margin-bottom: 20px; */
+  margin-bottom: 10px;
+}
+.contactsinf {
+  background: rgba(255, 255, 255, 0.8); /* Белый фон для блока контактов */
+  padding: 20px;
+  flex: 1; /* Занимает доступное пространство */
+  display: flex; /* Используем Flexbox для блока contacts */
+  flex-direction: column; /* Располагаем элементы по вертикали */
+  align-items: center; /* Выравниваем элементы по центру по горизонтали */
+  justify-content: center; /* Выравниваем элементы по центру по вертикали */
+  height: 370px;
+  max-width: 500px;
+}
+.map {
+  /* flex: 1; Занимает доступное пространство */
+  height: 370px;
+}
+/* отзывы */
+
+.blockreviews {
+  background: rgba(255, 255, 255, 0.6);
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+.reviews {
+  margin-top: 20px;
+}
+
+.reviews h2 {
+  text-align: center;
+  font-size: 28px;
+  padding-bottom: 10px;
+}
+
+.reviewsList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.reviewBlock {
+  width: calc(33.33% - 20px);
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid gray;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+.reviewBlock span {
+  color: #906b30;
+  font-size: 20px;
+}
+
+.reviewinfo {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.reviewBlock p {
+  margin: 0;
+}
+
+.newreview {
+  margin-top: 40px;
+  text-align: center;
+  
+}
+
+.newreview h2 {
+  margin-bottom: 10px;
+}
+
+.reviewForm {
+  display: inline-block;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.newreview textarea {
+  width: 100%;
+  height: 150px; /* Высота поля ввода */
+  margin-bottom: 10px;
+}
+
+.newreview button {
+  padding: 8px 18px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.newreview button:hover {
+  background-color: #0056b3;
+}
+
+/* НАПРАВЛЕНИЯ */
+/* Стили для контейнера списка направлений */
+.directions-list {
+  background: rgba(255, 255, 255, 0.3);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* Стили для каждого направления */
+.direction {
+  border: 1px solid gray;
+  background: rgba(255, 255, 255, 1);
+  border-radius: 10px;
+  padding: 15px;
+  margin: 10px;
+  width: calc(33% - 22px);  /* Три направления в ряд */
+  box-sizing: border-box;
+  float: left;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;  /*Выравниваем элементы по вертикали */
+}
+
+/* Стили для описания */
+.direction p {
+  width: 100%;
+  
+}
+.direction img{
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  
+}
+/* Очистка плавающих элементов */
+.directions-list::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* ИНСТРУКТОРЫ */
+/* Общие стили */
+.instructors-list {
+  max-width: 1400px; /* Ограничиваем ширину списка */
+  margin: 0 auto; /* Центрируем по горизонтали */
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+/* Стили для заголовка */
+.instructors-list h1 {
+  text-align: center; /* Центрируем текст */
+  
+}
+
+/* Стили для контейнера инструкторов */
+.instructors {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Равномерное распределение блоков по ширине */
+}
+
+/* Стили для блока с каждым инструктором */
+.instructor {
+  width: calc(33.33% - 20px); /* Три инструктора в ряд */
+  margin-bottom: 20px;
+  box-sizing: border-box;
+
+  display: flex; /* Используем flexbox */
+  border: 1px solid gray;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  padding: 10px;
+}
+
+/* Стили для изображения инструктора */
+.instructor img {
+  width: 200px;
+  height: auto;
+  border-radius: 5px;
+
+
+}
+
+/* Стили для блока с подробностями инструктора */
+.instructor-details {
+  margin-top: 10px;
+  padding-left: 10px;
+
+  flex-grow: 1; /* Занимаем все доступное пространство */
+  display: flex;
+  flex-direction: column; /* Описание инструктора располагается в столбец */
+  justify-content: flex-start; /* Выравнивание содержимого вверху блока */
+}
+
+/* Стили для имени инструктора */
+.instructor h2 {
+  margin: 0;
+}
+
+/* ТИПЫ АБОНЕМЕНТОВ И КАТЕГОРИИ */
+
+/* Общие стили */
+.categories-list {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid gray;
+  background: rgba(255, 255, 255, 0.7);
+  padding-bottom: 10px;
+  padding-top: 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  margin: 0;
+  list-style-type: none;
+}
+
+/* Стили для элементов списка категорий */
+.category-item {
+  margin-right: 20px;
+}
+
+.category-link {
+  text-decoration: none;
+  color: black;
+  padding: 5px;
+}
+
+.category-link:hover {
+  color: blue; /* Цвет при наведении и для активной категории */
+}
+
+.category-link.active {
+  color: blue; /* Цвет при наведении и для активной категории */
+  border-bottom: 2px solid blue; /* Подчеркивание активной категории */
+}
+
+
+/* Стили для отображения товаров в виде сетки */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px; /* Расстояние между товарами */
+  margin-top: 10px;
+  background: rgba(255, 255, 255, 0.6);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 10px;
+
+}
+
+.product-card {
+  border: 1px solid gray; /* Граница для прямоугольников */
+  background: rgba(255, 255, 255, 1);
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  text-align: center; /* Центрирование содержимого по горизонтали */
+  display: flex; /* Выравнивание содержимого по вертикали */
+  flex-direction: column; /* Элементы выстраиваются в колонну */
+  justify-content: center; /* Центрирование содержимого по вертикали */
+}
+
+/* ЛК КЛИЕНТА */
+.profilecontainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.left-column, .right-column {
+  display: flex; 
+  justify-content: space-between; /*  Равномерное распределение  */
+}
+ 
+.profile, .orders, .memberships, .active_records, .inactive_records {
+  border: 1px solid gray;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.8);
+  width: 60%;
+
+  flex: 1; /* Занимают все доступное пространство */
+  min-width: 0; /*  Предотвращение переполнения  */
+  box-sizing: border-box; /*  Включение padding и border в ширину  */
+  margin-right: 10px;
+}
+.memberships ul {
+  background: #f2f2f2;;
+  padding: 5px;
+  border-radius: 3px;
+}
+.active_records li, .inactive_records li {
+  background: #f2f2f2;;
+  padding: 5px;
+  border-radius: 3px;
+  margin-bottom: 5px;
+}
+
+
+.profile h3, .orders h3 {
+  margin-top: 0;
+}
+
+.profile ul {
+  list-style: none;
+  padding: 0;
+}
+
+.profile li {
+  margin-bottom: 5px;
+}
+
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.orders-table th, .orders-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.orders-table th {
+  background-color: #f2f2f2;
+}
+
+.order-item {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.order-item:last-child {
+  border-bottom: none;
+}
+
+.order-details {
+  display: none;
+}
+
+.order-item.active .order-details {
+  display: block;
+}
+
+.order-link {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.order-link:hover {
+  text-decoration: underline;
+}
+
+
+
+.cart {
+  border: 1px solid gray;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.8);
+  width: 60%;
+  margin: 0 auto; /* Добавлена эта строка */
+}
+.cart-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+
+.cart ul {
+  list-style: none;
+  padding: 0;
+}
+
+.cart li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.cart li:last-child {
+  border-bottom: none;
+}
+
+.cart .quantity {
+  display: flex;
+  align-items: center;
+}
+
+.cart .quantity input {
+  width: 40px;
+  text-align: center;
+  margin: 0 5px;
+}
+
+.cart .price {
+  display: flex;
+  align-items: baseline; /* Выравнивание по базовой линии текста */
+}
+
+.cart .price p, .cart .price strong {
+  margin: 0 5px;
+}
+
+.cart h5 {
+  margin-top: 0;
+  
+}
+
+.cart h4 {
+  margin-bottom: 10px;
+}
+
+.cart .button {
+  display: block;
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 3px;
+  text-decoration: none;
+  width: 20%;
+  margin: 0 auto; 
+  text-align: center; /* Центрируем текст внутри кнопки */
+  
+}
+
+/* РАСПИСАНИЕ */
+
+/* Стиль для контейнера с расписанием */
+.schedule-container {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  width: 100%;
+  /*  */
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+
+.weekdays-row {
+  display: flex;  
+}
+.week-row {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap to the next line */ 
+}
+
+.weekday-column, .day-column {
+  flex: 0 0 auto; /* Prevent columns from stretching */
+  width: calc(100% / 7);  /* Set width to 1/7th for 7 days of the week */
+  border: 1px solid gray; 
+  padding: 10px;
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+/*  */
+/* Стиль для элементов занятия */
+.class-item {
+  border: 1px solid #ccc;
+  padding: 5px;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+/* Стиль для формы выбора месяца */
+.month-filter-form {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.month-filter-form select {
+  padding: 5px;
+  border-radius: 5px;
+}
+/*ВЫВОД СООБЩЕНИЙ */
+.message {
+
+  background: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  max-width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+
+  position: relative;
+
+  }
+  
+  .register-form {
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 450px;
+
+  font-size: 1em;
+
+  position: absolute;
+  top: 0.5px;  
+  
+  }
+  
+  .register-form h2 {
+  text-align: center;
+  }
+  
+  .register-form label {
+  display: block;
+  margin-bottom: 2px;
+  }
+  
+  .register-form input[type="text"],
+  .register-form input[type="email"],
+  .register-form input[type="password"],
+  .register-form input[type="captcha"] {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 1px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  /*  */
+  font-size: 0.9em;
+  }
+  
+  .register-form button {
+  width: 100%;
+  padding: 5px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 1em;
+  margin-top: 5px;
+  }
+  
+  .register-form button:hover {
+  background-color: #0056b3;
+  }
+
+.createorders {
+  width: 50%;
+  background: rgba(255, 255, 255, 0.8);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  border-radius: 5px;
+}
+.createorders h3{
+  text-align: center;
+}
+.createorders button {
+  width: 25%;
+  padding: 5px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 1em;
+  margin-top: 5px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 16px;
+}
+.createorders button:hover {
+  background-color: #0056b3;
+}

@@ -1,0 +1,30 @@
+{% extends "prototype.html" %}
+{% load static %}
+
+{% block content %}
+
+
+<div class="instructors-list">
+
+    <h1>Наша команда:</h1>
+    <br>
+    <div class="instructors">
+{% for instructor in instructors %}
+        <div class="instructor">
+            <div class="instructor-details">
+        <h2>{{ instructor.last_name }} {{ instructor.name }} {% if instructor.middlename %}{{ instructor.middlename }}{% endif %}</h2>
+            <br>
+            <p>{{ instructor.about }}</p>
+            <br>
+            <p>Контакты: <br>&#9990 {{ instructor.phone }}</p>
+            </div>
+        {% if instructor.image %}
+            <img src="{{ instructor.image.url }}" alt="{{ instructor.name }}  " width=200 height=300>
+        {% endif %}
+        
+    </div>  
+{% endfor %}
+</div>
+</div>
+
+{% endblock %}

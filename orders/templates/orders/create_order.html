@@ -1,0 +1,78 @@
+{% extends "prototype.html" %}
+{% load static %}
+{% load carts_tags %}
+{% load lists_tags %} 
+
+{% block content %}
+<div class="createorders" >
+    <div>
+        <h3>Выбранные товары</h3>
+        <div id="cart-items-container">
+            <!-- Разметка корзины -->
+            {% user_carts request as carts %}
+
+            {% include "carts/includes/included_cart.html" %}
+            <!-- Закончилась разметка корзины -->
+        </div>
+    </div>
+    <!-- Детали заказа -->
+    <div>
+        <h3>Детали заказа</h3>
+        <div>
+                <form action="{% url "orders:create_order" %}" method="post">
+                    
+                    {% csrf_token %}
+                    
+                    <div>
+                        <div >
+                            
+                            <p> Выберите дату начала действия абонемента </p>
+                            {{ formset.management_form }}
+                            {% for form in formset %}
+                                {{ form.as_p }} 
+                                
+                            {% endfor %}
+                        </div>
+                        <div >
+                            <label for="id_first_name" class="form-label">Имя*:</label>
+                            <input type="text" class="form-control" id="id_first_name"
+                                value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}"
+                                name="first_name" required>
+                            {% if form.first_name.errors %}
+                                <div class="alert alert-danger alert-dismissible fade show">{{form.first_name.errors}}</div>
+                            {% endif %}
+                        </div>
+                        <div>
+                            <label for="id_last_name" class="form-label">Фамилия*:</label>
+                            <input type="text" class="form-control" id="id_last_name" name="last_name"
+                            value="{% if form.last_name.value %}{{ form.last_name.value }}{% endif %}"
+                            required>
+                            {% if form.last_name.errors %}
+                                <div class="alert alert-danger alert-dismissible fade show">{{form.last_name.errors}}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div>
+                            
+                             <label class="form-label">Способ оплаты: </label>
+                            
+                            <div>
+                                <input class="form-check-input" type="radio" name="payment_on_get"
+                                    id="id_payment_on_get" value="1" checked>
+                                <label class="form-check-label" for="id_payment_on_get">Наличными/картой
+                                    при получении</label>
+                                {% if form.payment_on_get.errors %}
+                                    <div class="alert alert-danger alert-dismissible fade show">{{form.payment_on_get.errors}}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    
+                
+                    <button type="submit" class="btn">Оформить заказ</button>
+                </form>
+            
+        </div>
+    </div>
+</div>
+{% endblock  %}

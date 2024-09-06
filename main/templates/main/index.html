@@ -1,0 +1,109 @@
+{% extends 'prototype.html' %}
+{% load static %}
+
+
+{% block titlen %}{{title}}{% endblock %}
+
+{% block content %}
+<div class="maininfo" > 
+  <div class="maintext" >
+<h1>Фитнес-студия</h1>
+<br>
+<p> описание фитнес-студии, например: <br> - это современная фитнес-студия, 
+  где ты найдешь идеальную тренировку для себя.  
+  Профессиональные тренеры, авторские программы 
+  и дружеская атмосфера помогут достичь желаемых результатов.
+  
+</p>
+{% if user.is_authenticated or  request.user.is_authenticated %}
+<br>
+<a href="{% url 'catalog:catalog' 'all' %}" class="mainbutton">Купить абонемент</a>
+<a href="{% url 'schedule' %}" class="mainbutton">Записаться на занятие</a>
+{% else %}
+<p><span> <br>Зарегистрируйтесь или авторизуйтесь, чтобы приобрести абонемент и уже сейчас записаться на занятие!</span>
+</p>
+<a href="{% url 'users:register'%}" class="mainbutton" > Зарегистрироваться</a>
+<a href="{% url 'users:login'%}" class="mainbutton">У меня уже есть аккаунт</a>
+{% endif %}
+</div>
+  <img src="{% static 'deps/images/main.png' %}">
+
+
+</div>
+
+ 
+<div class="blockreviews" id="user_reviews">
+    <div class="reviews" >
+  <h2 >Отзывы клиентов</h2>
+    <div class="reviewsList">
+    {% for review in reviews %}
+    <div class="reviewBlock">
+    <p class="reviewinfo">{{ review.user.first_name }} 
+   {{ review.user.last_name }} - {{ review.review_date }} - <span> {{ review.rating }}</span> 
+   </p>
+   <br>
+    <p>{{ review.review_text }}</p>
+    </div>
+    {% endfor %}
+  </div>
+  </div> 
+  
+  {% if user.is_authenticated %}
+ 
+ <div class="newreview">
+  <h2>Оставить отзыв</h2>
+  <form id="reviewForm" class="reviewForm" method="post" action="{% url 'main:add_rev' %}">
+    {% csrf_token %}
+    <div class="form-error">{{ form.non_field_errors }}</div>
+
+    
+    <label for="review_text">Текст отзыва:</label> <br>
+    <textarea name="review_text" id="review_text" rows="17" cols="60" maxlength="1020" placeholder="Введите ваш отзыв"></textarea>
+    <div class="errorlist">{{ form.review_text.errors }}</div>
+    <br>
+
+    <label for="rating">Оценка:</label>
+    <select name="rating" id="rating">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+    </select>
+    <br><br>
+    
+    <button type="submit">Отправить отзыв</button>
+  </form>
+</div>
+
+
+ {% else %}
+ <div class="newreview">
+ <h2>Авторизуйтесь, чтобы оставить отзыв</h2>
+</div>
+
+ {% endif %}
+
+</div>
+
+
+{% endblock %}
+{% block footer %}
+
+<div class="contacts" id="contacts">
+    <div class="contactsinf">
+        <h2>Контакты</h2>
+        <ul>
+          <li><strong>Телефон:</strong> +7 (123) 456-78-99</li>
+          <li><strong>Email:</strong> info@fitness-studio.ru</li>
+          <li><strong>Адрес:</strong> Санкт-Петербург, ул. Примерная, д. 1</li>
+        </ul>
+      </div>
+      <div class="map">    
+<script type="text/javascript" charset="utf-8" 
+async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A666667fa1918b8a917189cc41ba09d69e7cc3d6536425135fdd8f4f1ddf9dd75&amp;width=480&amp;height=370&amp;lang=ru_RU&amp;scroll=true">
+</script>
+</div>
+</div>
+
+{% endblock %}

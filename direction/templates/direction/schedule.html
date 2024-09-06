@@ -1,0 +1,71 @@
+{% extends "prototype.html" %}
+{% load static %}
+
+{% block content %}
+<h1>Расписание занятий</h1>
+
+
+<form method="get" action=".">  
+    <label for="month">Выберите месяц:</label>
+    <select name="month" id="month" onchange="this.form.submit()">
+        {% for month_num, month_name in russian_month_names.items %}
+            <option value="{{ month_num }}" {% if current_month == month_num|add:0 %}selected{% endif %}>
+                {{ month_name }} 
+            </option>
+        {% endfor %}
+    </select>
+</form>
+
+
+<div class="schedule-container">
+    {% if messages %}  
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %} 
+    <div class="weekdays-row">  
+        {% for day in weekdays %}
+            <div class="weekday-column">
+                <h2>{{day}}</h2>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% for week_number, week_schedule in schedule.items %}
+        <div class="week-row"> 
+            {% for day, day_classes in week_schedule.items %}
+                <div class="day-column">
+                    <div class="day-classes">
+                        {% for class in day_classes %}
+                            <div class="class-item">
+                                <p><strong>{{ class.class_date|date:"d E" }}</strong> ({{ class.class_date|date:'H:i' }})</p> 
+                                <p><strong>{{ class.direction }}</strong> </p> 
+                                <p>Инструктор: <br> {{ class.instructor }}</p>
+                                <p>Место: {{ class.place }}</p>
+                                <p>Свободных мест: {{ class.number }}</p>
+
+                                {% if user.is_authenticated %}
+                                    <form method="POST" action="{% url 'signup_for_class' class.pk %}">  
+                                        {% csrf_token %} 
+                                        <select name="membership_id"> 
+                                            {% for membership in user.membership_set.all %} 
+                                                <option value="{{ membership.pk }}">{{ membership.product }}(id:{{ membership.pk }})</option>
+                                            {% endfor %}
+                                        </select> 
+                                        <button type="submit">Записаться</button>
+                                    </form>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+</div>
+
+
+
+{% endblock %}
